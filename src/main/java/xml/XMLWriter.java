@@ -1,5 +1,7 @@
 package xml;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,27 +20,23 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
-public class XMLWriter {
 
-	public static void main(String[] args) {
-		ArrayList<String> elements = new ArrayList<String>();
-		elements.add("hola");
-		elements.add("Menos Trece");
-		elements.add("Juan Carlos I");
-		elements.add("Guillermo Díaz Inañez 47X");
-		
-		write(elements);
-	}
+public class XMLWriter {
+	public final String DEFAULT_ERROR_MESSAGE = "No deberías estar viendo esto";
 	
-	public static void write(ArrayList<String> elements) {
+	public String writeXML(ArrayList<String> elements) {
+		
+		String ERROR_MESSAGE = DEFAULT_ERROR_MESSAGE;
 		try {
 			SaveXMLToFile(XMLcreator(elements));
 		} catch (IOException | TransformerException | ParserConfigurationException e) {
+			ERROR_MESSAGE = "Se produjo un error durante la escritura del fichero";
 			e.printStackTrace();
 		}
+		return ERROR_MESSAGE;
 	}
 	
-	private static Document XMLcreator(ArrayList<String> elements) throws ParserConfigurationException {
+	private Document XMLcreator(ArrayList<String> elements) throws ParserConfigurationException {
 		
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
@@ -62,7 +60,7 @@ public class XMLWriter {
 		
 	}
 	
-	private static void SaveXMLToFile(Document xml) throws IOException, TransformerException {
+	private void SaveXMLToFile(Document xml) throws IOException, TransformerException {
 		String filename = System.getProperty("user.dir") + "/src/main/java/xml/resultado.xml";
 		
 		
@@ -78,8 +76,8 @@ public class XMLWriter {
 		transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
 		
 		transformer.transform(domsource, strResult);
-		System.out.println("Guardado xD");
-	
+		
+		Desktop.getDesktop().open(new File(filename));
 		writer.close();
 		
 		

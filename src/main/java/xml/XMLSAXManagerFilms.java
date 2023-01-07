@@ -13,7 +13,7 @@ public class XMLSAXManagerFilms extends DefaultHandler {
 	
 	private ArrayList<Film> films = new ArrayList<Film>();
 	private Film film;
-	private boolean bTitle,bGenre,bDirector,bFamousFilm,bStudio,bYear;
+	private boolean bTitle,bGenre,bDirector,bStudio,bYear;
 	
 	public void startDocument() throws SAXException {
 		

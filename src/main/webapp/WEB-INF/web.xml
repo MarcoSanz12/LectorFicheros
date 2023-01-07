@@ -9,4 +9,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ServletAccesoDA</display-name>
+    <servlet-name>ServletAccesoDA</servlet-name>
+    <servlet-class>common.ServletAccesoDA</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletAccesoDA</servlet-name>
+    <url-pattern>/ServletAccesoDA</url-pattern>
+  </servlet-mapping>
 </web-app>
