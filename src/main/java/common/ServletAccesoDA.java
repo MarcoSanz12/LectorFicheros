@@ -14,7 +14,7 @@ import xml.XMLWriter;
 public class ServletAccesoDA extends HttpServlet {
 
 	private String[] datosNames = { "dato1", "dato2", "dato3", "dato4", "dato5", "dato6" };
-	
+
 	private String ERROR_MESSAGE = "";
 	public final String DEFAULT_ERROR_MESSAGE = "No deberías estar viendo esto";
 	private final String UNIMPLEMENTED_ERROR_MESSAGE = "El módulo actual no está implementado";
@@ -109,6 +109,10 @@ public class ServletAccesoDA extends HttpServlet {
 
 				/* XML lectura */
 				case "read":
+					/*
+					 * Si no puede leer el fichero indicar la ruta del Workspace en Run > Run
+					 * Configurations > Arguments > Other
+					 */
 					jsp = "DatosAbiertosXML.jsp";
 					break;
 				/* XML escritura */
@@ -121,7 +125,7 @@ public class ServletAccesoDA extends HttpServlet {
 
 			}
 			}
-			
+
 			emptyFields = false;
 
 		}
@@ -129,7 +133,7 @@ public class ServletAccesoDA extends HttpServlet {
 		if (!ERROR_MESSAGE.equals(DEFAULT_ERROR_MESSAGE)) {
 			jsp = "ErrorDA.jsp";
 		}
-		request.getServletContext().setAttribute("errorMessage",ERROR_MESSAGE);
+		request.getServletContext().setAttribute("errorMessage", ERROR_MESSAGE);
 		request.getServletContext().setAttribute("emptyFields", emptyFields);
 		request.getRequestDispatcher(jsp).forward(request, response);
 
@@ -156,11 +160,11 @@ public class ServletAccesoDA extends HttpServlet {
 				int datosQuant = 0;
 
 				for (String dato : datosNames) {
-					
+
 					if (datosQuant > 0) {
 						break;
 					}
-				
+
 					String datoValue = request.getParameter(dato);
 					if (datoValue != null) {
 
